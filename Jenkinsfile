@@ -3,100 +3,44 @@ pipeline {
     stages {
         stage('Test Hello World in Multiple OS') {
             parallel {
-                stage('Ubuntu 22.04') {
+                stage('Python') {
                     agent {
                         docker {
-                            image 'ubuntu:22.04'
-                            args '-u root'
+                            image 'python:3.12-slim'
                         }
                     }
                     steps {
-                        sh 'apt-get update && apt-get install -y python3'
-                        sh 'python3 hello.py'
+                        sh 'python hello.py'
                     }
                 }
-                stage('Ubuntu 24.04') {
+                stage('C (gcc)') {
                     agent {
                         docker {
-                            image 'ubuntu:24.04'
-                            args '-u root'
+                            image 'gcc:latest'
                         }
                     }
                     steps {
-                        sh 'apt-get update && apt-get install -y python3'
-                        sh 'python3 hello.py'
+                        sh 'gcc hello.c -o hello_c && ./hello_c'
                     }
                 }
-                stage('Alpine 3.18') {
+                stage('Java') {
                     agent {
                         docker {
-                            image 'alpine:3.18'
-                            args '-u root'
+                            image 'openjdk:21-slim'
                         }
                     }
                     steps {
-                        sh 'apk add --no-cache python3'
-                        sh 'python3 hello.py'
+                        sh 'javac HelloWorld.java && java HelloWorld'
                     }
                 }
-                stage('Alpine 3.19') {
+                stage('Node.js') {
                     agent {
                         docker {
-                            image 'alpine:3.19'
-                            args '-u root'
+                            image 'node:20-slim'
                         }
                     }
                     steps {
-                        sh 'apk add --no-cache python3'
-                        sh 'python3 hello.py'
-                    }
-                }
-                stage('Debian 12') {
-                    agent {
-                        docker {
-                            image 'debian:12'
-                            args '-u root'
-                        }
-                    }
-                    steps {
-                        sh 'apt-get update && apt-get install -y python3'
-                        sh 'python3 hello.py'
-                    }
-                }
-                stage('Debian latest') {
-                    agent {
-                        docker {
-                            image 'debian:latest'
-                            args '-u root'
-                        }
-                    }
-                    steps {
-                        sh 'apt-get update && apt-get install -y python3'
-                        sh 'python3 hello.py'
-                    }
-                }
-                stage('Fedora 39') {
-                    agent {
-                        docker {
-                            image 'fedora:39'
-                            args '-u root'
-                        }
-                    }
-                    steps {
-                        sh 'dnf install -y python3'
-                        sh 'python3 hello.py'
-                    }
-                }
-                stage('Fedora latest') {
-                    agent {
-                        docker {
-                            image 'fedora:latest'
-                            args '-u root'
-                        }
-                    }
-                    steps {
-                        sh 'dnf install -y python3'
-                        sh 'python3 hello.py'
+                        sh 'node hello.js'
                     }
                 }
             }
