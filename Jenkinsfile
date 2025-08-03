@@ -4,9 +4,6 @@ pipeline {
         stage('Test Hello World in Multiple OS') {
             parallel {
                 stage('Ubuntu 22.04') {
-                    options {
-                        stageLabel('Ubuntu 22.04 LTS')
-                    }
                     agent {
                         docker {
                             image 'ubuntu:22.04'
@@ -19,9 +16,6 @@ pipeline {
                     }
                 }
                 stage('Ubuntu 24.04') {
-                    options {
-                        stageLabel('Ubuntu 24.04 LTS')
-                    }
                     agent {
                         docker {
                             image 'ubuntu:24.04'
@@ -34,9 +28,6 @@ pipeline {
                     }
                 }
                 stage('Alpine 3.18') {
-                    options {
-                        stageLabel('Alpine Linux 3.18')
-                    }
                     agent {
                         docker {
                             image 'alpine:3.18'
@@ -49,9 +40,6 @@ pipeline {
                     }
                 }
                 stage('Alpine 3.19') {
-                    options {
-                        stageLabel('Alpine Linux 3.19')
-                    }
                     agent {
                         docker {
                             image 'alpine:3.19'
@@ -64,9 +52,6 @@ pipeline {
                     }
                 }
                 stage('Debian 12') {
-                    options {
-                        stageLabel('Debian 12 Bookworm')
-                    }
                     agent {
                         docker {
                             image 'debian:12'
@@ -79,9 +64,6 @@ pipeline {
                     }
                 }
                 stage('Debian latest') {
-                    options {
-                        stageLabel('Debian Latest')
-                    }
                     agent {
                         docker {
                             image 'debian:latest'
@@ -94,9 +76,6 @@ pipeline {
                     }
                 }
                 stage('Fedora 39') {
-                    options {
-                        stageLabel('Fedora 39')
-                    }
                     agent {
                         docker {
                             image 'fedora:39'
@@ -109,9 +88,6 @@ pipeline {
                     }
                 }
                 stage('Fedora latest') {
-                    options {
-                        stageLabel('Fedora Latest')
-                    }
                     agent {
                         docker {
                             image 'fedora:latest'
